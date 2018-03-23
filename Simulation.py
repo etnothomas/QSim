@@ -63,7 +63,7 @@ if __name__ == "__main__":
     simTenPercent.loop()
 
     waitingTime = []
-    for user in simTenPercent.queue.waitingQueue + simTenPercent.queue.completed:
+    for user in simTenPercent.queue.completed:
         wait = math.ceil(user.waitingTime / 360)
         day = math.ceil(user.arrivalTime / 360)
         waitingTime.append((day, wait))
@@ -72,7 +72,8 @@ if __name__ == "__main__":
 
     avgWaitingTimeByDayOfEntry = waitingAndArrivalTimeDataFrame.groupby('day', as_index=False).mean()
 
-               
+    sbn.barplot(x='day', y='waitingtime', data=avgWaitingTimeByDayOfEntry)
+
 
 
 
