@@ -59,7 +59,7 @@ class Simulation:
 if __name__ == "__main__":
 
     import Simulation as sim
-    simTenPercent = sim.Simulation(21600, 0.20) # 360 casehandler minutes per day, times 60 working days
+    simTenPercent = sim.Simulation(32400, 0.1) # 360 casehandler minutes per day, times 60 working days
     simTenPercent.loop()
 
     waitingTime = []
