@@ -2,14 +2,14 @@ import numpy as np
 import math
 from User import User
 from Queue import Queue
-import matplotlib.pyplot as plt
-import csv
+import seaborn as sbn
+import pandas as pd
 
 def writeCsvToDisk(path, data):
-    file =  open(path, 'w')
-    with file as f:
+    with open(path, 'wb') as f:
         writer = csv.writer(f)
-        writer.writerows(data)
+        for elem in data:
+            writer.writerow(elem)
 
 
 
@@ -58,17 +58,21 @@ class Simulation:
 
 if __name__ == "__main__":
 
-    simTenPercent = Simulation(21600, 0.1) # 360 casehandler minutes per day, times 60 working days
-    simTenpercent.loop()
+    import Simulation as sim
+    simTenPercent = sim.Simulation(21600, 0.20) # 360 casehandler minutes per day, times 60 working days
+    simTenPercent.loop()
 
     waitingTime = []
     for user in simTenPercent.queue.waitingQueue + simTenPercent.queue.completed:
         wait = math.ceil(user.waitingTime / 360)
-        waitingTime.append(wait)
+        day = math.ceil(user.arrivalTime / 360)
+        waitingTime.append((day, wait))
 
-    writeCsvToDisk("C:/Users/Thomas/Documents/Qsim/resultsTenPercent.csv", waitingTime)
+    waitingAndArrivalTimeDataFrame = pd.DataFrame(waitingTime, columns=['day', 'waitingtime'])
 
+    avgWaitingTimeByDayOfEntry = waitingAndArrivalTimeDataFrame.groupby('day', as_index=False).mean()
 
+               
 
 
 
