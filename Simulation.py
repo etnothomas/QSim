@@ -59,17 +59,14 @@ class Simulation:
 if __name__ == "__main__":
 
     simTenPercent = Simulation(21600, 0.1) # 360 casehandler minutes per day, times 60 working days
-    simOnePercent = Simulation(21600, 0.01)  # 360 casehandler minutes per day, times 60 working days
-    simTwentyPercent = Simulation(21600, 0.2)  # 360 casehandler minutes per day, times 60 working days
     simTenpercent.loop()
-    simOnepercent.loop()
-    simTwentypercent.loop()
+
     waitingTime = []
-    for user in simTwentyPercent.queue.waitingQueue + simTwentyPercent.queue.completed:
+    for user in simTenPercent.queue.waitingQueue + simTenPercent.queue.completed:
         wait = math.ceil(user.waitingTime / 360)
         waitingTime.append(wait)
 
-    writeCsvToDisk("C:/Users/Thomas/Documents", waitingTime)
+    writeCsvToDisk("C:/Users/Thomas/Documents/Qsim/resultsTenPercent.csv", waitingTime)
 
 
 
