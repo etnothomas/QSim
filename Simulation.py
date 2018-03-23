@@ -31,6 +31,11 @@ class Simulation:
             if prop < self.newUserProbability:
                 self.queue.addUserToWaitingQueue(User.User(i))
 
+            # add a 100 users if the spike condition is triggered, one percent chance
+            if prop < 0.001:
+                for j in range(100):
+                    self.queue.addUserToWaitingQueue(User.User(i))
+
             # check if there are users in the queue
             # check if all workers are busy,if not assign a new user to the worker
             # and remove that user from the queue, in a round robin manner
@@ -59,7 +64,7 @@ class Simulation:
 if __name__ == "__main__":
 
     import Simulation as sim
-    simTenPercent = sim.Simulation(32400, 0.1) # 360 casehandler minutes per day, times 60 working days
+    simTenPercent = sim.Simulation(21600, 0.05) # 360 casehandler minutes per day, times 60 working days
     simTenPercent.loop()
 
     waitingTime = []
