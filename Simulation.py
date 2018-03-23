@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     avgWaitingTimeByDayOfEntry = waitingAndArrivalTimeDataFrame.groupby('day', as_index=False).mean()
 
-    sbn.barplot(x='day', y='waitingtime', data=avgWaitingTimeByDayOfEntry)
+    sbn.barplot(x='day', y='waitingtime', data=avgWaitingTimeByDayOfEntry, color='blue')
 
 
 
